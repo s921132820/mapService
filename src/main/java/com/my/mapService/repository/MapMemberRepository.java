@@ -2,6 +2,7 @@ package com.my.mapService.repository;
 
 import com.my.mapService.dto.Member;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
 
 import java.util.*;
 
