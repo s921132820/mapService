@@ -11,14 +11,11 @@ public interface MemberRepository {
 
     // 2. 특정 ID를 갖고 검색하는 기능
     Optional<Member> findById(Long id);
-
-    // 3. 전체 데이터 검색
+    // 3. 전체 데이터를 검색
     List<Member> findAll();
-
     // 4. 이름으로 검색하기
     Optional<Member> findByName(String name);
-
-    // 5. 삭제(ID)하기
+    // 5. 삭제(ID) 하기
     void deleteById(Long id);
 
     // 6. ID를 갖고 수정하기

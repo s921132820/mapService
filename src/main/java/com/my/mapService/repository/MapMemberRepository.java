@@ -2,7 +2,6 @@ package com.my.mapService.repository;
 
 import com.my.mapService.dto.Member;
 import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
 
 import java.util.*;
 
@@ -10,7 +9,7 @@ import java.util.*;
 public class MapMemberRepository implements MemberRepository{
     // 전체 멤버를 저장할 맵을 선언
     public static Map<Long, Member> store = new HashMap<>();
-    // 맵에 저장할 때 사용할 ID(key) 선언
+    // 맵에 저장할 때 사용할 ID(키) 선언
     private static Long sequence = 1L;
 
     @Override
@@ -24,26 +23,29 @@ public class MapMemberRepository implements MemberRepository{
     @Override
     public Optional<Member> findById(Long id) {
         return Optional.ofNullable(store.get(id));
-        // Optional : 결과가 있으면 돌려주고 없으면 null 값을 돌려줌
+//        Optional 은 결과가 있으면 돌려주고,
+//        없으면 null 값을 돌려준다.
     }
 
     @Override
     public List<Member> findAll() {
-        List<Member> memberList = new ArrayList<>(store.values());
+        List<Member> memberList =
+                new ArrayList<>(store.values());
         return memberList;
     }
 
     @Override
     public Optional<Member> findByName(String name) {
-        Optional<Member> result = store.values()
+        Optional<Member> result = store
+                .values()
                 .stream()
                 .filter(x -> x.getName().equals(name))
                 .findAny();
         // findAny : 하나라도 있으면 값 찾아주고, 없으면 null 반환
         return result;
 
-//        for(Long key : store.keySet()) {
-//            if(store.get(key).getName().equals(name)) {
+//        for (Long key : store.keySet()) {
+//            if(store.get(key).getName().equals(name)){
 //                Optional<Member> r = Optional.ofNullable(store.get(key));
 //                return r;
 //            }

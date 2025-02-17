@@ -1,15 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-  <h1>회원관리APP</h1>
-  <p>회원 기능</p>
-  <p>
-    <a th:href="@{/members/new}">회원가입</a>
-    <a th:href="@{/members}">회원 목록</a>
-  </p>
+<h1>고객관리APP</h1>
+<p>메뉴</p>
+<div th:unless="${session.sessionInfo} == null">
+    [[ ${session.sessionInfo.nickName} ]] 님 방문을 환영합니다
+</div>
+<p>
+    <th:block th:if="${session.sessionInfo} == null">
+        <a th:href="@{/signup}">회원가입</a><br>
+        <a th:href="@{/login}">로그인</a><br>
+    </th:block>
+    <th:block th:if="${session.sessionInfo} != null">
+        <a th:href="@{/logout}">로그아웃</a><br>
+        <a th:href="@{/userList}">사용자리스트</a><br>
+        <a th:href="@{/members/new}">고객정보입력</a><br>
+        <a th:href="@{/members}">고객목록보기</a>
+        <br>
+        <br>
+    </th:block>
+    <a th:href="@{user/myPage}">인터셉터(AOP) 테스트</a>
+</p>
 </body>
 </html>

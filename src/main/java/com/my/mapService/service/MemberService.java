@@ -13,29 +13,32 @@ import java.util.Optional;
 @Service
 //@RequiredArgsConstructor
 public class MemberService {
-    // 1. 필드 주입 방법
+    // 1. 필드주입방법
 //    @Autowired
 //    MapMemberRepository memberRepository;
 
-    // 2. 필드 주입 방법
-    // @RequiredArgsConstructor와 함께 사용
-    // private final MapMemberRepository repository;
+    // 2. 필드 주입방법
+    // @RequiredArgsConstructor
+//    private final MapMemberRepository repository;
 
     // 3. 생성자 주입 방법
     private final MemberRepository memberRepository;
+
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
 
-    // 회원가입 기능
+    // 회원가입기능
     public Long join(Member member) {
-        // 같은 이름이 있는 중복회원은 배제
-        Optional<Member> result = memberRepository.findByName(member.getName());
-        // 이름 주소 둘 다 확인
-        if(result.isPresent() &&  result.get().getAddress().equals(member.getAddress())){
-                return -1L;
-            } else {
-            // 같은 이름이 없으면 입력 가능
+        // 같은 이름, 주소가 있는 중복회원 X
+        Optional<Member> result = memberRepository
+                .findByName(member.getName());
+        // 이름, 주소 둘 다 확인
+        if(result.isPresent() &&
+                result.get().getAddress().equals(member.getAddress())) {
+            return -1L;
+        } else {
+            // 입력 가능
             Member save = memberRepository.save(member);
             return save.getId();
         }
@@ -56,7 +59,7 @@ public class MemberService {
         memberRepository.deleteById(id);
     }
 
-    // 수정처리
+    // 수정 처리
     public void update(Member member) {
         memberRepository.updateById(member.getId(), member);
     }
